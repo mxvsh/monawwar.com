@@ -1,93 +1,113 @@
 ---
 import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import ThemeToggle from "../components/ThemeToggle";
+import ProjectList from "../components/ProjectList";
+import CopyEmail from "../components/CopyEmail";
+import Chip from "../components/Chip.astro";
 
-const projects = (await getCollection("projects")).sort(
-	(a, b) => a.data.order - b.data.order,
-);
+const projects = (await getCollection("projects"))
+	.sort((a, b) => a.data.order - b.data.order)
+	.map(({ data }) => ({ name: data.name, description: data.description, link: data.link, logo: data.logo }));
 
 const title = "Monawwar Abdullah — Software Engineer";
 const description =
-	"Software engineer building clean, functional web tools. Creator of Drivebase, Wave, and SVG Logo.";
-const siteUrl = "https://monawwar.com";
-const ogImage = `${siteUrl}/og.jpg`;
+	"Software engineer building clean, functional web tools. Creator of Skid, Jelly, Drivebase, Wave, and SVG Logo.";
+
+const email = "hello@monawwar.com";
+const socials = [
+	{ label: "GitHub", handle: "mxvsh", href: "https://github.com/mxvsh" },
+	{ label: "X", handle: "monawwarx", href: "https://x.com/monawwarx" },
+	{ label: "LinkedIn", handle: "monawwar", href: "https://linkedin.com/in/monawwar" },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.ico" sizes="any" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<link rel="apple-touch-icon" href="/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<meta name="description" content={description} />
-		<link rel="canonical" href={siteUrl} />
+<Layout title={title} description={description}>
+	<div
+		aria-hidden="true"
+		class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,var(--surface),transparent)]"
+	>
+	</div>
 
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={siteUrl} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImage} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/"
+				aria-label="Home"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
 
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:site" content="@monawwarx" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImage} />
-		<style>
-			@media (prefers-color-scheme: dark) {
-				body {
-					background: #000;
-					color: #fff;
-				}
-				a {
-					color: #6cf;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<h1>Monawwar Abdullah</h1>
-		<p>Software Engineer</p>
+		<main class="flex-1 pt-20 sm:pt-28">
+			<section>
+				<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">
+					Monawwar Abdullah
+				</h1>
+				<p class="reveal mt-1.5 text-muted" style="--i: 2">Software Engineer</p>
+				<div class="reveal mt-8 max-w-lg space-y-4 text-[17px] leading-8 text-muted" style="--i: 3">
+					<p>
+						Born and raised in <Chip icon="pin" color="#f43f5e" tilt={-8} delay={450} map={{ lat: 25.2425, lon: 86.9842, label: "Bhagalpur, Bihar" }}>Bhagalpur</Chip>,
+						Bihar. Programming started as a curiosity and never really stopped being one.
+					</p>
+					<p>
+						I dropped out of college in 2019 to work on software full time. Since then I've shipped
+						projects across the stack — web apps, native apps, CLIs, and plenty in between.
+						I'm focused on <span class="text-fg">small, well-made tools.</span>
+					</p>
+				</div>
+			</section>
 
-		<h2>About</h2>
-		<p>
-			I write software. Mostly web stuff, sometimes other things. I like
-			building tools that work well and get out of the way.
-		</p>
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 4">
+					Projects
+				</h2>
+				<div class="reveal" style="--i: 5">
+					<ProjectList client:idle projects={projects} />
+				</div>
+			</section>
 
-		<h2>Projects</h2>
-		<ul>
-			{
-				projects.map((project) => (
-					<li>
-						<a href={project.data.link} target="_blank" rel="noopener noreferrer">{project.data.name}</a>
-						{" — "}
-						{project.data.description}
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 6">
+					Contact
+				</h2>
+				<p class="reveal mb-6 max-w-lg leading-relaxed text-muted" style="--i: 6">
+					The best way to reach me is on{" "}
+					<a href="https://x.com/monawwarx" target="_blank" rel="noopener noreferrer" class="link-underline text-fg">X</a>.
+				</p>
+				<ul class="reveal space-y-3 text-[15px]" style="--i: 7">
+					<li class="flex items-center gap-4">
+						<span class="w-20 shrink-0 font-mono text-xs text-subtle">Email</span>
+						<a href={`mailto:${email}`} class="link-underline text-fg">{email}</a>
+						<CopyEmail client:visible email={email} />
 					</li>
-				))
-			}
-		</ul>
+					{
+						socials.map((s) => (
+							<li class="flex items-center gap-4">
+								<span class="w-20 shrink-0 font-mono text-xs text-subtle">{s.label}</span>
+								<a
+									href={s.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="link-underline text-fg"
+								>
+									@{s.handle}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</main>
 
-		<h2>Contact</h2>
-		<ul>
-			<li>
-				<a href="mailto:hello@monawwar.com">Email</a>
-			</li>
-			<li>
-				<a href="https://github.com/mxvsh" target="_blank" rel="noopener noreferrer">GitHub</a>
-			</li>
-			<li>
-				<a href="https://x.com/monawwarx" target="_blank" rel="noopener noreferrer">X</a>
-			</li>
-			<li>
-				<a href="https://linkedin.com/in/monawwar" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-			</li>
-		</ul>
-
-		<p>&copy; 2026 Monawwar Abdullah. All rights reserved.</p>
-	</body>
-</html>
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			style="--i: 8"
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+			<span>monawwar.com</span>
+		</footer>
+	</div>
+</Layout>

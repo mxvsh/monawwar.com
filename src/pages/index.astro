@@ -5,6 +5,7 @@ import ThemeToggle from "../components/ThemeToggle";
 import ProjectList from "../components/ProjectList";
 import CopyEmail from "../components/CopyEmail";
 import Chip from "../components/Chip.astro";
+import { email, socials } from "../lib/contact";
 
 const projects = (await getCollection("projects"))
 	.sort((a, b) => a.data.order - b.data.order)
@@ -14,12 +15,6 @@ const title = "Monawwar Abdullah — Software Engineer";
 const description =
 	"Software engineer building clean, functional web tools. Creator of Skid, Jelly, Drivebase, Wave, and SVG Logo.";
 
-const email = "hello@monawwar.com";
-const socials = [
-	{ label: "GitHub", handle: "mxvsh", href: "https://github.com/mxvsh" },
-	{ label: "X", handle: "monawwarx", href: "https://x.com/monawwarx" },
-	{ label: "LinkedIn", handle: "monawwar", href: "https://linkedin.com/in/monawwar" },
-];
 ---
 
 <Layout title={title} description={description}>

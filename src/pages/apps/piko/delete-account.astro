@@ -1,0 +1,123 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ThemeToggle from "../../../components/ThemeToggle";
+
+const title = "Piko — Delete your account";
+const description = "How to delete your Piko account and the data linked to it.";
+
+const subject = encodeURIComponent("Delete my Piko account");
+const body = encodeURIComponent(
+	"Please delete my Piko account.\n\nMy username: \nSign-in method (guest, Apple, Google or email): \nEmail used to sign in (if any): \n",
+);
+const mailto = `mailto:hello@monawwar.com?subject=${subject}&body=${body}`;
+
+const steps = [
+	"Email hello@monawwar.com from the address you signed in with, using the button below. Guest players: include your username so we can find your account.",
+	"We may reply to confirm it is you, so nobody else can delete your account.",
+	"We delete your account within 7 days and email you when it is done.",
+];
+
+const deleted = [
+	"Your account and sign-in details",
+	"Your profile: username, display name and avatar",
+	"Your runs, personal records, season points and ranks",
+	"Your friends and friend requests",
+	"Your push notification token and preferences",
+];
+
+const kept = [
+	"Backups containing your data are cleared within 30 days.",
+	"Crash and analytics data that is not linked to your account may be kept in aggregate form.",
+	"Anything we are legally required to keep.",
+];
+---
+
+<Layout title={title} description={description} path="/apps/piko/delete-account">
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/apps/piko"
+				aria-label="Piko"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
+
+		<main class="flex-1 pt-20 sm:pt-28">
+			<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">
+				Delete your Piko account
+			</h1>
+			<p class="reveal mt-8 max-w-lg text-[17px] leading-8 text-muted" style="--i: 2">
+				You can ask us to delete your Piko account and the data linked to it at any time. This cannot
+				be undone.
+			</p>
+
+			<section class="mt-14">
+				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">How to request it</h2>
+				<ol class="space-y-3 text-[15px] leading-relaxed text-muted">
+					{
+						steps.map((step, i) => (
+							<li class="flex gap-3">
+								<span class="w-4 shrink-0 font-mono text-subtle">{i + 1}.</span>
+								<span>{step}</span>
+							</li>
+						))
+					}
+				</ol>
+				<a
+					href={mailto}
+					class="mt-8 inline-flex h-11 items-center rounded-full bg-fg px-6 text-sm font-medium text-bg transition-opacity hover:opacity-85"
+				>
+					Email hello@monawwar.com
+				</a>
+			</section>
+
+			<section class="mt-14">
+				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">What gets deleted</h2>
+				<ul class="space-y-3 text-[15px] leading-relaxed text-muted">
+					{
+						deleted.map((item) => (
+							<li class="flex gap-3">
+								<span aria-hidden="true" class="text-subtle">–</span>
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="mt-14">
+				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">What may be kept</h2>
+				<ul class="space-y-3 text-[15px] leading-relaxed text-muted">
+					{
+						kept.map((item) => (
+							<li class="flex gap-3">
+								<span aria-hidden="true" class="text-subtle">–</span>
+								<span>{item}</span>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="mt-14">
+				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">More</h2>
+				<p class="max-w-lg leading-relaxed text-muted">
+					See how Piko uses data in the <a href="/apps/piko/privacy" class="link-underline text-fg"
+						>privacy policy</a
+					>.
+				</p>
+			</section>
+		</main>
+
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			style="--i: 8"
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+			<span>monawwar.com</span>
+		</footer>
+	</div>
+</Layout>

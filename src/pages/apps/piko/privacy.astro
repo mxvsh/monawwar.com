@@ -1,0 +1,130 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ThemeToggle from "../../../components/ThemeToggle";
+
+const title = "Piko — Privacy Policy";
+const description = "How Piko collects, uses and protects your data, and how to delete it.";
+const updated = "October 9, 2026";
+
+const sections = [
+	{
+		heading: "What we collect",
+		items: [
+			"Account: an anonymous guest account is created when you open Piko. If you choose to claim it, we store the sign-in method you pick (Apple, Google or email) and the email address it gives us.",
+			"Profile: your username, display name and chosen avatar. Usernames, avatars and ranks are visible to other players.",
+			"Gameplay: your runs (game, score, date), personal records, season points, ranks, friends and friend requests.",
+			"Notifications: if you allow them, a push notification token for your device and your notification preferences.",
+			"Device and usage data: app version, device model and OS version, screen views and in-app events, and crash and error reports.",
+			"Advertising: Piko shows ads using Google AdMob. Where required, AdMob asks for your consent first. AdMob may use your device's advertising identifier and collect data such as IP address and device information to serve and measure ads.",
+		],
+	},
+	{
+		heading: "How we use it",
+		items: [
+			"To run the game: sign you in, save and sync your runs, calculate ranks and seasons, and show friends' records.",
+			"To send notifications you have asked for, such as friend requests and rank changes.",
+			"To understand and improve the app, and to find and fix crashes.",
+			"To show ads that keep Piko free.",
+		],
+	},
+	{
+		heading: "Who we share it with",
+		body: "We don't sell your personal data. We use these providers to run Piko, and they process data on our behalf:",
+		items: [
+			"Supabase: database, sign-in and file storage (your account, profile, runs and avatar).",
+			"PostHog: product analytics and error tracking.",
+			"Sentry: crash reporting.",
+			"Google AdMob: advertising and consent management.",
+			"Apple and Google: sign-in if you choose it, and push notification delivery.",
+		],
+	},
+	{
+		heading: "Advertising and tracking choices",
+		body: "If you are in the European Economic Area, the UK or Switzerland, Piko asks for your consent before showing personalised ads and lets you change your choice later. On iOS, Piko asks permission before tracking you across other companies' apps and websites; you can say no, or change this at any time in Settings. You can also reset or limit your advertising identifier in your device settings.",
+	},
+	{
+		heading: "Retention and deletion",
+		body: "We keep your data while your account exists. You can ask us to delete your account and everything linked to it at any time; see the delete account page. Deleting your account removes your profile, avatar, runs, records, friends and notification token. Backups are cleared within 30 days. Crash and analytics data that is not linked to your account may be kept in aggregate form.",
+	},
+	{
+		heading: "Your rights",
+		body: "Depending on where you live, you may have the right to access, correct, export or delete your data, to object to or restrict how it is used, and to withdraw consent. Email us and we will respond within 30 days.",
+	},
+	{
+		heading: "Children",
+		body: "Piko is not directed at children under 13, and we do not knowingly collect their personal data. If you believe a child has given us data, email us and we will delete it.",
+	},
+	{
+		heading: "Security",
+		body: "Data is sent over encrypted connections and stored with access controls, so players can only change their own data. No system is perfectly secure, but we work to protect yours.",
+	},
+	{
+		heading: "Changes",
+		body: "If we change this policy we will update the date above and, for significant changes, tell you in the app.",
+	},
+];
+---
+
+<Layout title={title} description={description} path="/apps/piko/privacy">
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/apps/piko"
+				aria-label="Piko"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
+
+		<main class="flex-1 pt-20 sm:pt-28">
+			<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">
+				Piko privacy policy
+			</h1>
+			<p class="reveal mt-1.5 text-muted" style="--i: 2">Last updated {updated}</p>
+			<p class="reveal mt-8 max-w-lg text-[17px] leading-8 text-muted" style="--i: 3">
+				Piko is a collection of quick mini games for iOS and Android, made by Monawwar Abdullah. This
+				page explains what data Piko collects and what happens to it.
+			</p>
+
+			{
+				sections.map((s) => (
+					<section class="mt-14">
+						<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">{s.heading}</h2>
+						{s.body && <p class="max-w-lg leading-relaxed text-muted">{s.body}</p>}
+						{s.items && (
+							<ul class={`space-y-3 text-[15px] leading-relaxed text-muted ${s.body ? "mt-4" : ""}`}>
+								{s.items.map((item) => (
+									<li class="flex gap-3">
+										<span aria-hidden="true" class="text-subtle">–</span>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						)}
+					</section>
+				))
+			}
+
+			<section class="mt-14">
+				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">Contact</h2>
+				<p class="max-w-lg leading-relaxed text-muted">
+					Questions or requests about your data? Email
+					<a href="mailto:hello@monawwar.com?subject=Piko%20privacy" class="link-underline text-fg"
+						>hello@monawwar.com</a
+					>. To delete your account, see
+					<a href="/apps/piko/delete-account" class="link-underline text-fg">delete account</a>.
+				</p>
+			</section>
+		</main>
+
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			style="--i: 8"
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+			<span>monawwar.com</span>
+		</footer>
+	</div>
+</Layout>

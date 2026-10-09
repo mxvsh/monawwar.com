@@ -1,6 +1,5 @@
 ---
 // Inline word with a tilted, colored squircle icon in front of it.
-// Pass `map` to show an OpenStreetMap preview of that spot on hover/focus.
 const icons = {
 	pin: '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
 };
@@ -10,31 +9,15 @@ interface Props {
 	color: string;
 	tilt?: number;
 	delay?: number;
-	map?: { lat: number; lon: number; label: string };
 }
 
-const { icon, color, tilt = -8, delay = 0, map } = Astro.props;
-
-const mapSrc =
-	map &&
-	`https://www.openstreetmap.org/export/embed.html?${new URLSearchParams({
-		bbox: [map.lon - 0.08, map.lat - 0.045, map.lon + 0.08, map.lat + 0.045].map((n) => n.toFixed(4)).join(","),
-		layer: "mapnik",
-		marker: `${map.lat},${map.lon}`,
-	})}`;
+const { icon, color, tilt = -8, delay = 0 } = Astro.props;
 ---
 
-<span
-	class:list={[
-		"group/chip relative whitespace-nowrap text-fg",
-		map && "cursor-default rounded-md focus-visible:outline-offset-2",
-	]}
-	tabindex={map ? 0 : undefined}
-	data-map-chip={map ? "" : undefined}
->
+<span class="group/chip relative whitespace-nowrap text-fg">
 	<span
 		aria-hidden="true"
-		class="mr-1 inline-grid size-[1.4em] translate-y-[0.05em] animate-chip-in place-items-center rounded-[0.42em] text-white shadow-[0_1px_2px_rgb(0_0_0/0.15),inset_0_1px_0_rgb(255_255_255/0.25)] rotate-(--tilt) transition-[rotate,scale] duration-500 ease-spring group-hover/chip:rotate-[calc(var(--tilt)*-1)] group-hover/chip:scale-110 group-focus-within/chip:rotate-[calc(var(--tilt)*-1)] group-focus-within/chip:scale-110 supports-[corner-shape:squircle]:rounded-[45%] supports-[corner-shape:squircle]:[corner-shape:squircle]"
+		class="mr-1 inline-grid size-[1.4em] translate-y-[0.05em] animate-chip-in place-items-center rounded-[0.42em] text-white shadow-[0_1px_2px_rgb(0_0_0/0.15),inset_0_1px_0_rgb(255_255_255/0.25)] rotate-(--tilt) transition-[rotate,scale] duration-500 ease-spring group-hover/chip:rotate-[calc(var(--tilt)*-1)] group-hover/chip:scale-110 supports-[corner-shape:squircle]:rounded-[45%] supports-[corner-shape:squircle]:[corner-shape:squircle]"
 		style={`background:${color};--tilt:${tilt}deg;animation-delay:${delay}ms`}
 	>
 		<svg
@@ -48,40 +31,4 @@ const mapSrc =
 			set:html={icons[icon]}
 		/>
 	</span><slot />
-	{
-		map && (
-			// Bottom padding (not margin) bridges the gap so the pointer can move onto the card.
-			<span class="pointer-events-none absolute bottom-full left-1/2 z-20 block w-72 origin-bottom -translate-x-1/2 translate-y-1 scale-95 pb-2.5 text-left leading-normal whitespace-normal opacity-0 blur-[2px] transition-[opacity,translate,scale,filter] delay-100 duration-300 ease-out-soft group-hover/chip:pointer-events-auto group-hover/chip:translate-y-0 group-hover/chip:scale-100 group-hover/chip:opacity-100 group-hover/chip:blur-none group-hover/chip:delay-0 group-focus-within/chip:pointer-events-auto group-focus-within/chip:translate-y-0 group-focus-within/chip:scale-100 group-focus-within/chip:opacity-100 group-focus-within/chip:blur-none group-focus-within/chip:delay-0">
-				<span class="block rounded-xl bg-bg p-1 shadow-xl shadow-black/10 ring-1 ring-line">
-					<span class="block h-40 overflow-hidden rounded-lg bg-surface">
-						<iframe
-							data-src={mapSrc}
-							title={`Map of ${map.label}`}
-							class="size-full opacity-0 transition-opacity duration-500 data-loaded:opacity-100 dark:[filter:invert(0.9)_hue-rotate(180deg)_saturate(0.7)]"
-						/>
-					</span>
-					<span class="flex items-center justify-between px-2 pt-1.5 pb-1 font-mono text-[11px] text-subtle">
-						<span>{map.label}</span>
-						<span>
-							{map.lat.toFixed(2)}°N {map.lon.toFixed(2)}°E
-						</span>
-					</span>
-				</span>
-			</span>
-		)
-	}
 </span>
-
-<script>
-	// Load the map only once someone shows interest, not on page load.
-	for (const chip of document.querySelectorAll<HTMLElement>("[data-map-chip]")) {
-		const load = () => {
-			const frame = chip.querySelector("iframe");
-			if (!frame || frame.src) return;
-			frame.addEventListener("load", () => frame.setAttribute("data-loaded", ""), { once: true });
-			frame.src = frame.dataset.src!;
-		};
-		chip.addEventListener("pointerenter", load, { once: true });
-		chip.addEventListener("focusin", load, { once: true });
-	}
-</script>

@@ -5,20 +5,36 @@ interface Props {
 	title: string;
 	description: string;
 	path?: string;
+	/** Absolute path to a 1200x630 social image, e.g. "/apps/typecam/og.png". */
+	image?: string;
+	imageAlt?: string;
+	/** Page-specific favicon; defaults to the site favicon. */
+	icon?: string;
 }
 
-const { title, description, path = "" } = Astro.props;
+const { title, description, path = "", image = "/og.jpg", imageAlt, icon } = Astro.props;
 const siteUrl = "https://monawwar.com";
 const pageUrl = `${siteUrl}${path}`;
-const ogImage = `${siteUrl}/og.jpg`;
+const ogImage = `${siteUrl}${image}`;
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.ico" sizes="any" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<link rel="apple-touch-icon" href="/favicon.png" />
+		{
+			icon ? (
+				<>
+					<link rel="icon" type="image/png" href={icon} />
+					<link rel="apple-touch-icon" href={icon} />
+				</>
+			) : (
+				<>
+					<link rel="icon" href="/favicon.ico" sizes="any" />
+					<link rel="icon" type="image/png" href="/favicon.png" />
+					<link rel="apple-touch-icon" href="/favicon.png" />
+				</>
+			)
+		}
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
@@ -34,12 +50,16 @@ const ogImage = `${siteUrl}/og.jpg`;
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
+		{imageAlt && <meta property="og:image:alt" content={imageAlt} />}
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:site" content="@monawwarx" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
+		{imageAlt && <meta name="twitter:image:alt" content={imageAlt} />}
+
+		<slot name="head" />
 
 		<script is:inline>
 			(() => {

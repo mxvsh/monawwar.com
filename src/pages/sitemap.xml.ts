@@ -8,6 +8,7 @@ export const GET: APIRoute = async () => {
 	const paths = [
 		"/",
 		"/contact",
+		"/projects",
 		...projects.map((p) => `/projects/${p.id}`),
 		"/apps/piko/privacy",
 		"/apps/piko/delete-account",

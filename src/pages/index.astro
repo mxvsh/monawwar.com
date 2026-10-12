@@ -54,9 +54,10 @@ const description =
 			</section>
 
 			<section class="mt-20 sm:mt-24">
-				<h2 class="reveal mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 4">
-					Projects
-				</h2>
+				<div class="reveal mb-4 flex items-baseline justify-between" style="--i: 4">
+					<h2 class="font-mono text-xs uppercase tracking-[0.14em] text-subtle">Projects</h2>
+					<a href="/projects" class="link-underline font-mono text-xs text-muted hover:text-fg">View all</a>
+				</div>
 				<div class="reveal" style="--i: 5">
 					<ProjectList client:idle projects={projects} />
 				</div>

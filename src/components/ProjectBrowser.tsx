@@ -107,7 +107,7 @@ export default function ProjectBrowser({ projects }: { projects: Project[] }) {
 			<div
 				role="group"
 				aria-label="Filter by category"
-				className="-mx-6 mt-4 flex gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 [&::-webkit-scrollbar]:hidden"
+				className="-mx-6 mt-3 flex gap-2 overflow-x-auto px-6 py-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:px-0 [&::-webkit-scrollbar]:hidden"
 			>
 				{categories.map((c) => {
 					const active = c === category;

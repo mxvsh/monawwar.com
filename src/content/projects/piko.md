@@ -2,7 +2,7 @@
 name: Piko
 description: Quick mini games with personal records, seasonal leaderboards and friends.
 logo: /projects/piko.png
-date: 2026-04-01
+date: 2026-10-12
 
 title: Piko — Quick mini games
 seoDescription: Piko is a collection of quick mini games for iOS and Android — Road Hop, Piano Tiles, Stack Tower and Paper Plane — with personal records, seasonal leaderboards and friends.

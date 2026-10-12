@@ -1,12 +1,13 @@
 ---
 name: Piko
 description: Quick mini games with personal records, seasonal leaderboards and friends.
+logo: /projects/piko.png
 date: 2026-04-01
 
 title: Piko — Quick mini games
-seoDescription: Piko is a collection of quick mini games with personal records, seasonal leaderboards and friends. Starting with Road Hop.
+seoDescription: Piko is a collection of quick mini games for iOS and Android — Road Hop, Piano Tiles, Stack Tower and Paper Plane — with personal records, seasonal leaderboards and friends.
 tagline: Quick mini games for iOS and Android
-intro: A collection of small games built for short breaks, with personal records, seasonal leaderboards and friends. It starts with **Road Hop**, a 3D voxel road-crossing runner, and more games are on the way.
+intro: A collection of small games built for short breaks, with personal records, seasonal leaderboards and friends. Play **Road Hop**, **Piano Tiles**, **Stack Tower** and **Paper Plane**, with more games on the way.
 category: GameApplication
 os: iOS, Android
 status: In beta
@@ -15,7 +16,7 @@ screenshots:
 features:
   - { title: Quick runs, text: "Jump in, play for a minute, beat your best." }
   - { title: Personal records, text: "Every game tracks your best, season by season." }
-  - { title: Friends, text: "Follow friends' records and send beat-my-score challenges." }
+  - { title: Friends, text: "Add friends and see where you rank on each game's friends board." }
   - { title: Offline, text: "Play anywhere. Your runs sync when you're back online." }
 outro:
   title: Support

@@ -18,7 +18,7 @@ const single = shots.length === 1;
 {
 	shots.length > 0 && (
 		<div
-			class="reveal mt-14 flex snap-x snap-mandatory gap-3 overflow-x-auto p-px [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+			class="reveal mt-14 flex snap-x snap-mandatory gap-3 mx-[calc(var(--bleed)*-1)] overflow-x-auto px-(--bleed) py-px scroll-px-(--bleed) [--g:1.5rem] sm:[--g:2rem] [--bleed:max(var(--g),calc((100vw-42rem)/2+var(--g)))] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 			style={`--i: ${i}`}
 		>
 			{shots.map((s, n) => (

@@ -16,7 +16,7 @@ interface Highlight {
 }
 
 function displayUrl(link: string) {
-	const url = new URL(link);
+	const url = new URL(link, "https://monawwar.com");
 	return (url.host + url.pathname).replace(/^www\./, "").replace(/\/$/, "");
 }
 
@@ -48,8 +48,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
 				<li key={project.link} className="relative">
 					<a
 						href={project.link}
-						target="_blank"
-						rel="noopener noreferrer"
+						{...(project.link.startsWith("/") ? {} : { target: "_blank", rel: "noopener noreferrer" })}
 						onMouseEnter={(e) => moveTo(e.currentTarget)}
 						onFocus={(e) => moveTo(e.currentTarget)}
 						onBlur={hide}

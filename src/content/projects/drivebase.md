@@ -2,7 +2,7 @@
 name: Drivebase
 description: Cloud-agnostic file management platform for people and teams using multiple storage providers.
 logo: /projects/drivebase.svg
-date: 2026-07-01
+date: 2025-03-06
 
 title: Drivebase — One file manager for all your cloud storage
 seoDescription: Drivebase is an open-source, self-hosted file manager for Google Drive, S3, Dropbox, OneDrive and local storage. Browse, transfer and manage files across providers from one desktop-like interface.

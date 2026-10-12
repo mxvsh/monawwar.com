@@ -2,7 +2,7 @@
 name: Wave
 description: Private macOS dictation app for fast voice-to-text workflows.
 logo: /projects/wave/icon.png
-date: 2026-06-01
+date: 2026-03-01
 
 title: Wave — Private dictation for macOS
 seoDescription: Wave is a native macOS dictation app. Hold a key, speak, and your words are pasted at the cursor. On-device Whisper or Groq, plus an AI Mode for rewrites and answers. Free and open source.

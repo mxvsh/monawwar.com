@@ -3,7 +3,7 @@ name: TypeCam
 description: Use your iPhone as a wired, low-latency camera for OBS on macOS.
 logo: /projects/typecam/icon.png
 listed: false
-date: 2026-03-01
+date: 2026-10-07
 
 title: TypeCam — Use your iPhone as a wired camera for OBS
 seoDescription: TypeCam turns your iPhone into a low-latency, wired camera for OBS Studio on macOS. Hardware-encoded HEVC over the USB cable, pro camera controls and mic audio. Open source.

@@ -2,7 +2,7 @@
 name: Skid
 description: Create App Store screenshots, Product Hunt galleries, and social launch images from playful templates, right in your browser.
 logo: /projects/skid.png
-date: 2026-09-01
+date: 2026-09-28
 
 title: Skid — App Store screenshots and launch images
 tagline: Launch images, without the designer

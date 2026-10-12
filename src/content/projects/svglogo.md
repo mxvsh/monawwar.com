@@ -2,7 +2,7 @@
 name: SVG Logo
 description: Generate clean icon-based logos instantly in your browser — export as SVG, PNG, or ICO.
 logo: /projects/svglogo.png
-date: 2026-05-01
+date: 2026-03-11
 
 title: SVG Logo — Free SVG logo maker in your browser
 seoDescription: Free SVG logo maker to create icons and brand marks in seconds. Customize icons, colors and gradients, then export SVG, PNG, ICO and app icon packs from your browser. No sign-up.

@@ -3,6 +3,17 @@ import { glob } from "astro/loaders";
 
 const item = z.object({ title: z.string(), text: z.string() });
 
+// schema.org applicationCategory values; shown without the "Application" suffix in filters.
+const category = z.enum([
+	"BusinessApplication",
+	"DesignApplication",
+	"DeveloperApplication",
+	"GameApplication",
+	"MultimediaApplication",
+	"ProductivityApplication",
+	"UtilitiesApplication",
+]);
+
 const projects = defineCollection({
 	loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
 	schema: z.object({
@@ -16,12 +27,12 @@ const projects = defineCollection({
 		seoDescription: z.string().optional(),
 		tagline: z.string(),
 		intro: z.string(),
-		category: z.string(),
+		category,
 		os: z.string(),
 		og: z.object({ src: z.string(), alt: z.string() }).optional(),
 		status: z.string().optional(),
 		links: z
-			.array(z.object({ label: z.string(), href: z.string().url(), icon: z.enum(["apple", "github", "web"]) }))
+			.array(z.object({ label: z.string(), href: z.string().url(), icon: z.enum(["apple", "testflight", "google-play", "github", "web"]) }))
 			.default([]),
 		screenshots: z
 			.array(z.object({ src: z.string(), alt: z.string(), width: z.number(), height: z.number() }))

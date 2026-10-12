@@ -1,0 +1,293 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ThemeToggle from "../../components/ThemeToggle";
+
+const repo = "https://github.com/mxvsh/wave";
+const download = `${repo}/releases/latest`;
+const path = "/apps/wave";
+
+const title = "Wave — Private dictation for macOS";
+const description =
+	"Wave is a native macOS dictation app. Hold a key, speak, and your words are pasted at the cursor. On-device Whisper or Groq, plus an AI Mode for rewrites and answers. Free and open source.";
+
+const steps = [
+	{ title: "Hold Fn", text: "Works in any app. Wave lives in the menu bar, so there's no window to open." },
+	{ title: "Speak", text: "Full sentences or rough thoughts. Wave listens while you stay focused." },
+	{ title: "Release", text: "Your words are transcribed and pasted right at the cursor." },
+];
+
+const features = [
+	{ title: "Local Whisper", text: "On-device transcription with whisper.cpp. Nothing leaves your Mac." },
+	{ title: "Groq", text: "Bring your own Groq key for near-instant cloud transcription." },
+	{ title: "AI Mode", text: "Hold Right Option to write emails, draft prompts or rewrite selected text." },
+	{ title: "Two modes", text: "Push to talk, or press once to start and again to stop." },
+	{ title: "Vocabulary", text: "Teach Wave the names and terms it should always get right." },
+	{ title: "Snippets", text: "Save reusable text. AI Mode knows about them too." },
+	{ title: "History", text: "Recent transcriptions a click away in the menu bar." },
+	{ title: "Open source", text: "A native Swift app. No account, no subscription." },
+];
+
+const shots = [
+	{ src: "/apps/wave/ai-mode.webp", alt: "Wave shortcut settings with Fn for dictation and Right Option for AI Mode" },
+	{ src: "/apps/wave/byok.webp", alt: "Wave model settings using a Groq API key" },
+	{ src: "/apps/wave/local.webp", alt: "Downloading a local Whisper model in Wave" },
+];
+
+const requirements = [
+	{ label: "Mac", value: "macOS 14 or later" },
+	{ label: "Mic", value: "Built-in or any input device" },
+	{ label: "Groq", value: "Optional, with your own API key" },
+];
+
+const faqs = [
+	{
+		q: "Is Wave free?",
+		a: "Yes. Wave is free and open source. You only pay Groq if you choose their hosted transcription or AI features, and their free tier is plenty to start.",
+	},
+	{
+		q: "Can I use it offline?",
+		a: "Yes. Download a Whisper model in Settings and dictation runs entirely on your Mac. Internet is only needed for Groq.",
+	},
+	{
+		q: "Do I need an account?",
+		a: "No. There's no sign-up. For cloud features you paste in your own Groq API key.",
+	},
+	{
+		q: "Can I change the shortcuts?",
+		a: "Yes. Dictation defaults to Fn and AI Mode to Right Option. Both can be changed in Settings, and Wave tells left and right modifier keys apart.",
+	},
+];
+
+const jsonLd = [
+	{
+		"@context": "https://schema.org",
+		"@type": "SoftwareApplication",
+		name: "Wave",
+		description,
+		url: `https://monawwar.com${path}`,
+		image: "https://monawwar.com/apps/wave/icon.png",
+		applicationCategory: "ProductivityApplication",
+		operatingSystem: "macOS 14",
+		offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+		author: { "@type": "Person", name: "Monawwar Abdullah", url: "https://monawwar.com" },
+		sameAs: [repo],
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: faqs.map((f) => ({
+			"@type": "Question",
+			name: f.q,
+			acceptedAnswer: { "@type": "Answer", text: f.a },
+		})),
+	},
+];
+---
+
+<Layout
+	title={title}
+	description={description}
+	path={path}
+	image="/apps/wave/og.png"
+	imageAlt="Wave: your voice, typed instantly, anywhere on your Mac"
+	icon="/apps/wave/icon.png"
+>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+	<div
+		aria-hidden="true"
+		class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,var(--surface),transparent)]"
+	>
+	</div>
+
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/"
+				aria-label="Home"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
+
+		<main class="flex-1 pt-20 sm:pt-28">
+			<section>
+				<img
+					src="/apps/wave/icon.webp"
+					alt="Wave app icon"
+					width="64"
+					height="64"
+					class="reveal size-16 rounded-[18px] ring-1 ring-line"
+					style="--i: 1"
+				/>
+				<h1 class="reveal mt-6 text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">Wave</h1>
+				<p class="reveal mt-1.5 text-muted" style="--i: 2">Your voice, typed instantly, anywhere on your Mac</p>
+				<p class="reveal mt-8 max-w-lg text-[17px] leading-8 text-muted" style="--i: 3">
+					Hold a key, speak, and let go. Wave turns your voice into text and{" "}
+					<span class="text-fg">pastes it right at the cursor</span>, in any app. Run Whisper on your Mac for
+					complete privacy, or use Groq for speed. No account, no subscription.
+				</p>
+
+				<div class="reveal mt-8 flex flex-wrap items-center gap-3" style="--i: 4">
+					<a
+						href={download}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex h-10 items-center gap-2 rounded-full bg-fg px-4 text-sm font-medium text-bg transition-opacity duration-200 hover:opacity-85"
+					>
+						<svg aria-hidden="true" viewBox="0 0 24 24" class="size-4 fill-current">
+							<path
+								d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.88 1.15 9.13.76 1.1 1.67 2.33 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.24-.02 2.02-1.12 2.77-2.22.87-1.28 1.23-2.51 1.25-2.58-.03-.01-2.39-.92-2.41-3.65ZM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28Z"
+							></path>
+						</svg>
+						Download for macOS
+					</a>
+					<a
+						href={repo}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium text-fg ring-1 ring-line transition-colors duration-200 hover:bg-hover"
+					>
+						<svg aria-hidden="true" viewBox="0 0 16 16" class="size-4 fill-current">
+							<path
+								d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+							></path>
+						</svg>
+						GitHub
+					</a>
+				</div>
+			</section>
+
+			<div class="reveal mt-14 sm:-mx-8" style="--i: 5">
+				<img
+					src="/apps/wave/general.webp"
+					alt="Wave settings window next to the line Local. Private. Speech-to-Text."
+					width="1600"
+					height="1000"
+					class="w-full rounded-2xl ring-1 ring-line"
+				/>
+			</div>
+
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 6">
+					How it works
+				</h2>
+				<ol class="reveal grid gap-3 sm:grid-cols-3" style="--i: 6">
+					{
+						steps.map((s, i) => (
+							<li class="rounded-2xl bg-surface/60 p-5 ring-1 ring-line">
+								<span class="font-mono text-xs text-subtle">0{i + 1}</span>
+								<h3 class="mt-3 text-[15px] font-medium text-fg">{s.title}</h3>
+								<p class="mt-1.5 text-sm leading-relaxed text-muted">{s.text}</p>
+							</li>
+						))
+					}
+				</ol>
+			</section>
+
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 7">
+					Features
+				</h2>
+				<ul class="reveal space-y-4 text-[15px]" style="--i: 7">
+					{
+						features.map((f) => (
+							<li class="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
+								<span class="shrink-0 text-fg sm:w-32">{f.title}</span>
+								<span class="text-muted">{f.text}</span>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 8">
+					Screenshots
+				</h2>
+				<div
+					class="reveal -mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:-mx-8 sm:px-8 [&::-webkit-scrollbar]:hidden"
+					style="--i: 8"
+				>
+					{
+						shots.map((s) => (
+							<img
+								src={s.src}
+								alt={s.alt}
+								width="1600"
+								height="1000"
+								loading="lazy"
+								class="w-[85%] shrink-0 snap-center rounded-2xl ring-1 ring-line sm:w-[80%]"
+							/>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 9">
+					Requirements
+				</h2>
+				<dl class="reveal space-y-3 text-[15px]" style="--i: 9">
+					{
+						requirements.map((r) => (
+							<div class="flex items-center gap-4">
+								<dt class="w-20 shrink-0 font-mono text-xs text-subtle">{r.label}</dt>
+								<dd class="text-fg">{r.value}</dd>
+							</div>
+						))
+					}
+				</dl>
+			</section>
+
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-2 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 10">
+					FAQ
+				</h2>
+				<div class="reveal divide-y divide-line" style="--i: 10">
+					{
+						faqs.map((f) => (
+							<details class="group py-4">
+								<summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] text-fg [&::-webkit-details-marker]:hidden">
+									{f.q}
+									<span
+										aria-hidden="true"
+										class="font-mono text-subtle transition-transform duration-300 ease-out-soft group-open:rotate-45"
+									>
+										+
+									</span>
+								</summary>
+								<p class="mt-2 max-w-lg text-sm leading-relaxed text-muted">{f.a}</p>
+							</details>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="mt-20 sm:mt-24">
+				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 11">
+					Contribute
+				</h2>
+				<p class="reveal max-w-lg leading-relaxed text-muted" style="--i: 11">
+					Wave is built in the open. Browse the{" "}
+					<a href={repo} target="_blank" rel="noopener noreferrer" class="link-underline text-fg">source</a>,
+					open an{" "}
+					<a href={`${repo}/issues`} target="_blank" rel="noopener noreferrer" class="link-underline text-fg">issue</a>,
+					join the{" "}
+					<a href="https://discord.gg/6YznRVc23J" target="_blank" rel="noopener noreferrer" class="link-underline text-fg">Discord</a>{" "}
+					or <a href="/contact" class="link-underline text-fg">get in touch</a>.
+				</p>
+			</section>
+		</main>
+
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			style="--i: 12"
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+			<span>monawwar.com</span>
+		</footer>
+	</div>
+</Layout>

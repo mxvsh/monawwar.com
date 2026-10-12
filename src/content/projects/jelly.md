@@ -2,7 +2,7 @@
 name: Jelly
 description: A fast, native terminal for macOS built on Liquid Glass.
 logo: /projects/jelly/icon.png
-order: 2
+date: 2026-08-01
 
 title: Jelly — A native terminal for macOS
 seoDescription: Jelly is a fast, native terminal for macOS 26 with glass windows, named sessions, splits, a live file explorer and Claude Code awareness. Free and open source.

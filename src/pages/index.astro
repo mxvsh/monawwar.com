@@ -1,21 +1,13 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import ThemeToggle from "../components/ThemeToggle";
 import ProjectList from "../components/ProjectList";
 import CopyEmail from "../components/CopyEmail";
 import Chip from "../components/Chip.astro";
 import { email, socials } from "../lib/contact";
+import { getProjects } from "../lib/projects";
 
-const projects = (await getCollection("projects", ({ data }) => data.listed))
-	.sort((a, b) => a.data.order - b.data.order)
-	.map(({ id, data }) => ({
-		name: data.name,
-		description: data.description,
-		link: `/projects/${id}`,
-		site: (data.links.find((l) => l.icon === "web") ?? data.links.find((l) => l.icon === "github"))?.href,
-		logo: data.logo,
-	}));
+const projects = (await getProjects()).slice(0, 5);
 
 const title = "Monawwar Abdullah — Software Engineer";
 const description =

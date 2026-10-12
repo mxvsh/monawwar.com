@@ -6,6 +6,7 @@ export interface Project {
 	link: string;
 	site?: string;
 	logo?: string;
+	category: string;
 }
 
 interface Highlight {

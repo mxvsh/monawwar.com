@@ -2,6 +2,7 @@
 name: Piko
 description: Quick mini games with personal records, seasonal leaderboards and friends.
 listed: false
+date: 2026-04-01
 
 title: Piko — Quick mini games
 seoDescription: Piko is a collection of quick mini games with personal records, seasonal leaderboards and friends. Starting with Road Hop.

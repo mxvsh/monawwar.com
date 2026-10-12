@@ -1,0 +1,303 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import ThemeToggle from "../../components/ThemeToggle";
+import Screenshots from "../../components/Screenshots.astro";
+
+export async function getStaticPaths() {
+	const projects = await getCollection("projects");
+	return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const p = project.data;
+const site = "https://monawwar.com";
+const path = `/projects/${project.id}`;
+const description = p.seoDescription ?? p.description;
+
+// Content strings support **emphasis**, `code` and [links](/path).
+const inline = (s: string) =>
+	s
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/\*\*(.+?)\*\*/g, '<span class="text-fg">$1</span>')
+		.replace(/`(.+?)`/g, '<code class="rounded-md bg-surface px-1.5 py-0.5 font-mono text-[0.85em] text-fg ring-1 ring-line">$1</code>')
+		.replace(/\[(.+?)\]\((.+?)\)/g, (_, text, href) =>
+			href.startsWith("/")
+				? `<a href="${href}" class="link-underline text-fg">${text}</a>`
+				: `<a href="${href}" target="_blank" rel="noopener noreferrer" class="link-underline text-fg">${text}</a>`,
+		);
+const plain = (s: string) => s.replace(/\*\*|`/g, "").replace(/\[(.+?)\]\(.+?\)/g, "$1");
+
+const icons = {
+	apple: {
+		viewBox: "0 0 24 24",
+		d: "M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.88 1.15 9.13.76 1.1 1.67 2.33 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.24-.02 2.02-1.12 2.77-2.22.87-1.28 1.23-2.51 1.25-2.58-.03-.01-2.39-.92-2.41-3.65ZM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28Z",
+	},
+	github: {
+		viewBox: "0 0 16 16",
+		d: "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z",
+	},
+	web: {
+		viewBox: "0 0 24 24",
+		d: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8ZM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96ZM4.26 14a7.82 7.82 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26Zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.07 16Zm2.95-8H5.07a7.99 7.99 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.02 8ZM12 19.96A14.1 14.1 0 0 1 10.09 16h3.82A14.1 14.1 0 0 1 12 19.96ZM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4Zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56ZM16.36 14a16.5 16.5 0 0 0 0-4h3.38a7.82 7.82 0 0 1 0 4h-3.38Z",
+	},
+};
+
+let i = 4;
+const next = () => ++i;
+
+const jsonLd = [
+	{
+		"@context": "https://schema.org",
+		"@type": p.os === "Web" ? "WebApplication" : "SoftwareApplication",
+		name: p.name,
+		description,
+		url: `${site}${path}`,
+		...(p.logo && { image: `${site}${p.logo}` }),
+		...(p.screenshots.length > 0 && { screenshot: p.screenshots.map((s) => `${site}${s.src}`) }),
+		applicationCategory: p.category,
+		operatingSystem: p.os,
+		offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+		author: { "@type": "Person", name: "Monawwar Abdullah", url: site },
+		...(p.links.length > 0 && { sameAs: p.links.map((l) => l.href) }),
+	},
+	{
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{ "@type": "ListItem", position: 1, name: "Monawwar Abdullah", item: site },
+			{ "@type": "ListItem", position: 2, name: p.name, item: `${site}${path}` },
+		],
+	},
+	...(p.faqs.length > 0
+		? [
+				{
+					"@context": "https://schema.org",
+					"@type": "FAQPage",
+					mainEntity: p.faqs.map((f) => ({
+						"@type": "Question",
+						name: f.q,
+						acceptedAnswer: { "@type": "Answer", text: plain(f.a) },
+					})),
+				},
+			]
+		: []),
+];
+---
+
+<Layout
+	title={p.title}
+	description={description}
+	path={path}
+	image={p.og?.src}
+	imageAlt={p.og?.alt}
+	icon={p.logo?.endsWith(".png") ? p.logo : undefined}
+>
+	<script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+	<div
+		aria-hidden="true"
+		class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-80 bg-[radial-gradient(60%_100%_at_50%_0%,var(--surface),transparent)]"
+	>
+	</div>
+
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/"
+				aria-label="Home"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
+
+		<main class="flex-1 pt-20 sm:pt-28">
+			<section>
+				{
+					p.logo && (
+						<img
+							src={p.logo}
+							alt={`${p.name} icon`}
+							width="64"
+							height="64"
+							class="reveal mb-6 size-16 rounded-[18px] ring-1 ring-line"
+							style="--i: 1"
+						/>
+					)
+				}
+				<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">{p.name}</h1>
+				<p class="reveal mt-1.5 text-muted" style="--i: 2">{p.tagline}</p>
+				<p class="reveal mt-8 max-w-lg text-[17px] leading-8 text-muted" style="--i: 3" set:html={inline(p.intro)} />
+
+				{
+					(p.links.length > 0 || p.status) && (
+						<div class="reveal mt-8 flex flex-wrap items-center gap-3" style="--i: 4">
+							{p.links.map((l, n) => (
+								<a
+									href={l.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									class:list={[
+										"inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-medium transition duration-200",
+										n === 0 ? "bg-fg text-bg hover:opacity-85" : "text-fg ring-1 ring-line hover:bg-hover",
+									]}
+								>
+									<svg aria-hidden="true" viewBox={icons[l.icon].viewBox} class="size-4 fill-current">
+										<path d={icons[l.icon].d} />
+									</svg>
+									{l.label}
+								</a>
+							))}
+							{p.status && (
+								<span class="inline-flex h-10 items-center gap-2 rounded-full px-4 font-mono text-xs text-subtle ring-1 ring-line">
+									<span class="relative flex size-1.5">
+										<span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-500 opacity-60" />
+										<span class="relative inline-flex size-1.5 rounded-full bg-amber-500" />
+									</span>
+									{p.status}
+								</span>
+							)}
+						</div>
+					)
+				}
+			</section>
+
+			<Screenshots shots={p.screenshots} i={5} />
+
+			{
+				p.steps.length > 0 && (
+					<section class="mt-20 sm:mt-24">
+						<h2 class="reveal mb-8 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+							How it works
+						</h2>
+						<ol class="reveal grid gap-8 sm:grid-cols-3 sm:gap-6" style={`--i: ${i}`}>
+							{p.steps.map((s, n) => (
+								<li class="group relative pl-12 sm:pl-0">
+									{n < p.steps.length - 1 && (
+										<span
+											aria-hidden="true"
+											class="step-line absolute top-10 -bottom-6 left-4 w-px bg-line sm:top-4 sm:-right-4 sm:bottom-auto sm:left-11 sm:h-px sm:w-auto"
+											style={`animation-delay: ${500 + n * 250}ms`}
+										/>
+									)}
+									<span class="absolute top-0 left-0 grid size-8 place-items-center rounded-full bg-bg font-mono text-xs text-subtle ring-1 ring-line transition-colors duration-300 ease-out-soft group-hover:bg-fg group-hover:text-bg group-hover:ring-fg sm:static">
+										{n + 1}
+									</span>
+									<h3 class="flex flex-wrap items-center gap-2 pt-1 text-[15px] font-medium text-fg sm:mt-5 sm:pt-0">
+										{s.title}
+										{s.keys?.map((k) => (
+											<kbd class="inline-flex h-6 min-w-6 items-center justify-center rounded-md bg-surface px-1.5 font-mono text-[11px] font-normal text-fg shadow-[inset_0_-1.5px_0_var(--line)] ring-1 ring-line">
+												{k}
+											</kbd>
+										))}
+									</h3>
+									<p class="mt-1.5 text-sm leading-relaxed text-muted" set:html={inline(s.text)} />
+								</li>
+							))}
+						</ol>
+					</section>
+				)
+			}
+
+			{
+				p.features.length > 0 && (
+					<section class="mt-20 sm:mt-24">
+						<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+							Features
+						</h2>
+						<ul class="reveal space-y-4 text-[15px]" style={`--i: ${i}`}>
+							{p.features.map((f) => (
+								<li class="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
+									<span class="shrink-0 text-fg sm:w-32">{f.title}</span>
+									<span class="text-muted" set:html={inline(f.text)} />
+								</li>
+							))}
+						</ul>
+					</section>
+				)
+			}
+
+			{
+				p.requirements.length > 0 && (
+					<section class="mt-20 sm:mt-24">
+						<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+							Requirements
+						</h2>
+						<dl class="reveal space-y-3 text-[15px]" style={`--i: ${i}`}>
+							{p.requirements.map((r) => (
+								<div class="flex items-baseline gap-4">
+									<dt class="w-20 shrink-0 font-mono text-xs text-subtle">{r.label}</dt>
+									<dd class="text-fg">{r.value}</dd>
+								</div>
+							))}
+						</dl>
+					</section>
+				)
+			}
+
+			{
+				p.faqs.length > 0 && (
+					<section class="mt-20 sm:mt-24">
+						<h2 class="reveal mb-2 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+							FAQ
+						</h2>
+						<div class="reveal divide-y divide-line" style={`--i: ${i}`}>
+							{p.faqs.map((f) => (
+								<details class="group py-4">
+									<summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] text-fg [&::-webkit-details-marker]:hidden">
+										{f.q}
+										<span
+											aria-hidden="true"
+											class="font-mono text-subtle transition-transform duration-300 ease-out-soft group-open:rotate-45"
+										>
+											+
+										</span>
+									</summary>
+									<p class="mt-2 max-w-lg text-sm leading-relaxed text-muted" set:html={inline(f.a)} />
+								</details>
+							))}
+						</div>
+					</section>
+				)
+			}
+
+			{
+				p.outro && (
+					<section class="mt-20 sm:mt-24">
+						<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+							{p.outro.title}
+						</h2>
+						<p class="reveal max-w-lg leading-relaxed text-muted" style={`--i: ${i}`} set:html={inline(p.outro.text)} />
+					</section>
+				)
+			}
+		</main>
+
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			style={`--i: ${next()}`}
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+			<span>monawwar.com</span>
+		</footer>
+	</div>
+</Layout>
+
+<style>
+	.step-line {
+		animation: draw 0.9s var(--ease-out-soft) both;
+	}
+
+	@keyframes draw {
+		from {
+			clip-path: inset(0 100% 100% 0);
+		}
+		to {
+			clip-path: inset(0);
+		}
+	}
+</style>

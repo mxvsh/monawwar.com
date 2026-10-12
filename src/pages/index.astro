@@ -7,9 +7,15 @@ import CopyEmail from "../components/CopyEmail";
 import Chip from "../components/Chip.astro";
 import { email, socials } from "../lib/contact";
 
-const projects = (await getCollection("projects"))
+const projects = (await getCollection("projects", ({ data }) => data.listed))
 	.sort((a, b) => a.data.order - b.data.order)
-	.map(({ data }) => ({ name: data.name, description: data.description, link: data.link, logo: data.logo }));
+	.map(({ id, data }) => ({
+		name: data.name,
+		description: data.description,
+		link: `/projects/${id}`,
+		site: (data.links.find((l) => l.icon === "web") ?? data.links.find((l) => l.icon === "github"))?.href,
+		logo: data.logo,
+	}));
 
 const title = "Monawwar Abdullah — Software Engineer";
 const description =

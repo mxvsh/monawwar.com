@@ -1,0 +1,39 @@
+---
+interface Shot {
+	src: string;
+	alt: string;
+	width: number;
+	height: number;
+}
+
+interface Props {
+	shots?: Shot[];
+	i?: number;
+}
+
+const { shots = [], i = 0 } = Astro.props;
+const single = shots.length === 1;
+---
+
+{
+	shots.length > 0 && (
+		<div
+			class="reveal mt-14 flex snap-x snap-mandatory gap-3 overflow-x-auto p-px [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+			style={`--i: ${i}`}
+		>
+			{shots.map((s, n) => (
+				<img
+					src={s.src}
+					alt={s.alt}
+					width={s.width}
+					height={s.height}
+					loading={n === 0 ? "eager" : "lazy"}
+					class:list={[
+						"h-auto shrink-0 snap-start rounded-2xl ring-1 ring-line",
+						single ? "w-full" : "w-[88%]",
+					]}
+				/>
+			))}
+		</div>
+	)
+}

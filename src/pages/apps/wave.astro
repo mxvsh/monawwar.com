@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ThemeToggle from "../../components/ThemeToggle";
+import Screenshots from "../../components/Screenshots.astro";
 
 const repo = "https://github.com/mxvsh/wave";
 const download = `${repo}/releases/latest`;
@@ -28,10 +29,11 @@ const features = [
 ];
 
 const shots = [
+	{ src: "/apps/wave/general.webp", alt: "Wave settings window next to the line Local. Private. Speech-to-Text." },
 	{ src: "/apps/wave/ai-mode.webp", alt: "Wave shortcut settings with Fn for dictation and Right Option for AI Mode" },
 	{ src: "/apps/wave/byok.webp", alt: "Wave model settings using a Groq API key" },
 	{ src: "/apps/wave/local.webp", alt: "Downloading a local Whisper model in Wave" },
-];
+].map((s) => ({ ...s, width: 1600, height: 1000 }));
 
 const requirements = [
 	{ label: "Mac", value: "macOS 14 or later" },
@@ -160,15 +162,7 @@ const jsonLd = [
 				</div>
 			</section>
 
-			<div class="reveal mt-14 sm:-mx-8" style="--i: 5">
-				<img
-					src="/apps/wave/general.webp"
-					alt="Wave settings window next to the line Local. Private. Speech-to-Text."
-					width="1600"
-					height="1000"
-					class="w-full rounded-2xl ring-1 ring-line"
-				/>
-			</div>
+			<Screenshots shots={shots} i={5} />
 
 			<section class="mt-20 sm:mt-24">
 				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 6">
@@ -201,29 +195,6 @@ const jsonLd = [
 						))
 					}
 				</ul>
-			</section>
-
-			<section class="mt-20 sm:mt-24">
-				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 8">
-					Screenshots
-				</h2>
-				<div
-					class="reveal -mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-2 [scrollbar-width:none] sm:-mx-8 sm:px-8 [&::-webkit-scrollbar]:hidden"
-					style="--i: 8"
-				>
-					{
-						shots.map((s) => (
-							<img
-								src={s.src}
-								alt={s.alt}
-								width="1600"
-								height="1000"
-								loading="lazy"
-								class="w-[85%] shrink-0 snap-center rounded-2xl ring-1 ring-line sm:w-[80%]"
-							/>
-						))
-					}
-				</div>
 			</section>
 
 			<section class="mt-20 sm:mt-24">

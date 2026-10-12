@@ -10,8 +10,8 @@ export const GET: APIRoute = async () => {
 		"/contact",
 		"/projects",
 		...projects.map((p) => `/projects/${p.id}`),
-		"/apps/piko/privacy",
-		"/apps/piko/delete-account",
+		"/projects/piko/privacy",
+		"/projects/piko/delete-account",
 	];
 	const urls = paths.map((p) => `<url><loc>${site}${p === "/" ? "" : p}</loc></url>`).join("");
 	return new Response(

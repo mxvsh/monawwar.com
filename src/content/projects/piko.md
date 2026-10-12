@@ -20,5 +20,5 @@ features:
   - { title: Offline, text: "Play anywhere. Your runs sync when you're back online." }
 outro:
   title: Support
-  text: Questions or feedback about Piko? [Get in touch](/contact). Read the [privacy policy](/apps/piko/privacy).
+  text: Questions or feedback about Piko? [Get in touch](/contact). Read the [privacy policy](/projects/piko/privacy).
 ---

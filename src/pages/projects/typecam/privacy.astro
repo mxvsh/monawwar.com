@@ -1,0 +1,101 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ThemeToggle from "../../../components/ThemeToggle";
+
+const title = "TypeCam — Privacy Policy";
+const description = "TypeCam collects no data. How the app uses your camera and microphone, and what stays on your devices.";
+const updated = "October 13, 2026";
+
+const sections = [
+	{
+		heading: "What we collect",
+		body: "Nothing. TypeCam has no accounts, no analytics, no advertising, no crash reporting and no third-party SDKs. We never receive your video, audio, settings or any information about you or your device.",
+	},
+	{
+		heading: "Camera and microphone",
+		body: "TypeCam asks for camera and microphone access so it can send live video and audio to OBS Studio on your Mac. The feed is encoded on your iPhone and travels over the USB cable to the TypeCam OBS plugin on your computer. TypeCam does not record, save or upload it: there is no photo or video capture, no gallery and no local recording.",
+	},
+	{
+		heading: "How the connection works",
+		body: "The app listens on your iPhone's loopback interface only, and your Mac reaches it through Apple's USB tunnel (usbmuxd), the same link Xcode uses. It does not open a port on your network, does not use Wi-Fi or mobile data, and does not talk to any server run by us or anyone else.",
+	},
+	{
+		heading: "What stays on your device",
+		body: "Your settings, such as resolution, frame rate, codec, audio options and overlays, are saved on your iPhone so the app remembers them. They are never sent anywhere. Overlays like zebra and focus peaking show on the phone preview only and are never added to the stream.",
+	},
+	{
+		heading: "Who we share it with",
+		body: "No one, because we don't have your data. What you do with the stream after it reaches OBS, such as recording it or broadcasting it to a service, is up to you and covered by the policies of the software and services you use.",
+	},
+	{
+		heading: "Retention and deletion",
+		body: "There is nothing to delete on our side. Deleting the app removes its saved settings from your iPhone. You can turn off camera and microphone access at any time in Settings › TypeCam.",
+	},
+	{
+		heading: "Children",
+		body: "TypeCam does not collect personal data from anyone, including children.",
+	},
+	{
+		heading: "Open source",
+		body: "TypeCam is open source, so you can check these claims in the code on GitHub.",
+	},
+	{
+		heading: "Changes",
+		body: "If this policy changes we will update the date above. Any change that adds data collection would also be described in the app's release notes.",
+	},
+];
+---
+
+<Layout title={title} description={description} path="/projects/typecam/privacy">
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/projects/typecam"
+				aria-label="TypeCam"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
+
+		<main class="flex-1 pt-20 sm:pt-28">
+			<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">
+				TypeCam privacy policy
+			</h1>
+			<p class="reveal mt-1.5 text-muted" style="--i: 2">Last updated {updated}</p>
+			<p class="reveal mt-8 max-w-lg text-[17px] leading-8 text-muted" style="--i: 3">
+				TypeCam is an iPhone app, made by Monawwar Abdullah, that streams your camera and microphone to
+				OBS Studio on your Mac over a USB cable. This page explains what data TypeCam handles. In short:
+				it collects none.
+			</p>
+
+			{
+				sections.map((s) => (
+					<section class="mt-14">
+						<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">{s.heading}</h2>
+						<p class="max-w-lg leading-relaxed text-muted">{s.body}</p>
+					</section>
+				))
+			}
+
+			<section class="mt-14">
+				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">Contact</h2>
+				<p class="max-w-lg leading-relaxed text-muted">
+					Questions about privacy? Email
+					<a href="mailto:hello@monawwar.com?subject=TypeCam%20privacy" class="link-underline text-fg"
+						>hello@monawwar.com</a
+					>.
+				</p>
+			</section>
+		</main>
+
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			style="--i: 8"
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+			<span>monawwar.com</span>
+		</footer>
+	</div>
+</Layout>

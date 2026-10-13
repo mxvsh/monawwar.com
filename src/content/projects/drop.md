@@ -1,13 +1,13 @@
 ---
 name: Drop
-description: Convert, compress and keep files mid-drag on your Mac. Hold Option while dragging to bring up the drop zone.
+description: Convert, compress and keep files mid-drag on your Mac. Press Option while dragging to bring up the drop zone.
 logo: /projects/drop/icon.png
 date: 2026-10-13
 
 title: Drop — Convert and compress files mid-drag on your Mac
-seoDescription: Drop is a native macOS menu bar app. Start dragging any file, hold Option, and drop it on an action to convert images to PNG, JPEG, WebP or ICNS, compress videos, make GIFs, merge PDFs, remove backgrounds and more. Everything runs on your Mac.
+seoDescription: Drop is a native macOS menu bar app. Start dragging any file, press Option, and drop it on an action to convert images to PNG, JPEG, WebP or ICNS, compress videos, make GIFs, merge PDFs, remove backgrounds and more. Everything runs on your Mac.
 tagline: Convert, compress and keep files without leaving the drag
-intro: Start dragging any file, hold Option, and Drop appears **right beside your cursor** with actions that fit that file. Drop it on one and the result lands next to the original, ready to drag on into Slack, Mail or Figma. Everything runs on your Mac.
+intro: Start dragging any file, press Option, and Drop appears **right beside your cursor** with actions that fit that file. Drop it on one and the result lands next to the original, ready to drag on into Slack, Mail or Figma. Everything runs on your Mac.
 category: UtilitiesApplication
 os: macOS 15
 og:
@@ -18,7 +18,7 @@ links:
   - { label: GitHub, href: "https://github.com/mxvsh/Drop", icon: github }
 steps:
   - { title: Drag, text: "Start dragging any file from Finder, the desktop, Mail or any other app." }
-  - { title: Hold, keys: ["⌥"], text: "Drop appears beside your cursor, showing only what fits that file." }
+  - { title: Press, keys: ["⌥"], text: "Drop appears beside your cursor and stays open, showing only what fits that file." }
   - { title: Drop, text: "Let go on an action. The result is saved next to the original." }
 features:
   - { title: Images, text: "PNG, JPEG, HEIC and WebP, plus ICNS and ICO icons. Resize, compress or strip location data." }

@@ -73,6 +73,16 @@ const ogImage = `${siteUrl}${image}`;
 				document.documentElement.classList.toggle("dark", dark);
 			})();
 		</script>
+
+		{
+			!import.meta.env.DEV && (
+				<script
+					defer
+					src="https://analytics.mxv.sh/script.js"
+					data-website-id="8164101d-09ba-4989-8a0b-9e30813c6db5"
+				/>
+			)
+		}
 	</head>
 	<body class="min-h-dvh overflow-x-clip">
 		<slot />

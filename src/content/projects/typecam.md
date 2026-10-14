@@ -13,8 +13,8 @@ os: iOS 18, macOS 13
 og:
   src: /projects/typecam/og.png
   alt: "TypeCam: your iPhone as a wired, low-latency camera for OBS"
-status: v1 in development
 links:
+  - { label: Download on the App Store, href: "https://apps.apple.com/us/app/typecam-obs-camera/id6821537950", icon: apple }
   - { label: View on GitHub, href: "https://github.com/mxvsh/TypeCam", icon: github }
 steps:
   - { title: Plug in, text: Connect your iPhone to your Mac with a USB-C or Lightning cable and tap Trust. }

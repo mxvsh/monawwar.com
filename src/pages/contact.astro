@@ -1,8 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ThemeToggle from "../components/ThemeToggle";
-import CopyEmail from "../components/CopyEmail";
-import { email, socials } from "../lib/contact";
+import ContactList from "../components/ContactList.astro";
 
 const title = "Contact — Monawwar Abdullah";
 const description = "Get in touch with Monawwar Abdullah for questions, support or feedback.";
@@ -35,36 +34,14 @@ const description = "Get in touch with Monawwar Abdullah for questions, support 
 				<a href="https://x.com/monawwarx" target="_blank" rel="noopener noreferrer" class="link-underline text-fg">X</a>.
 			</p>
 
-			<ul class="reveal mt-10 space-y-3 text-[15px]" style="--i: 3">
-				<li class="flex items-center gap-4">
-					<span class="w-20 shrink-0 font-mono text-xs text-subtle">Email</span>
-					<a href={`mailto:${email}`} class="link-underline text-fg">{email}</a>
-					<CopyEmail client:visible email={email} />
-				</li>
-				{
-					socials.map((s) => (
-						<li class="flex items-center gap-4">
-							<span class="w-20 shrink-0 font-mono text-xs text-subtle">{s.label}</span>
-							<a
-								href={s.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="link-underline text-fg"
-							>
-								@{s.handle}
-							</a>
-						</li>
-					))
-				}
-			</ul>
+			<ContactList class="reveal mt-10" style="--i: 3" />
 		</main>
 
 		<footer
-			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
 			style="--i: 4"
 		>
 			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
-			<span>monawwar.com</span>
 		</footer>
 	</div>
 </Layout>

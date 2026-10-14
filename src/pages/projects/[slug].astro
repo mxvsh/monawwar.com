@@ -161,7 +161,7 @@ const jsonLd = [
 								</a>
 							))}
 							{p.status && (
-								<span class="inline-flex h-10 items-center gap-2 rounded-full px-4 font-mono text-xs text-subtle ring-1 ring-line">
+								<span class="inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm text-subtle ring-1 ring-line">
 									<span class="relative flex size-1.5">
 										<span class="absolute inline-flex size-full animate-ping rounded-full bg-amber-500 opacity-60" />
 										<span class="relative inline-flex size-1.5 rounded-full bg-amber-500" />
@@ -179,7 +179,7 @@ const jsonLd = [
 			{
 				p.steps.length > 0 && (
 					<section class="mt-20 sm:mt-24">
-						<h2 class="reveal mb-8 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+						<h2 class="reveal mb-8 text-sm font-medium text-muted" style={`--i: ${next()}`}>
 							How it works
 						</h2>
 						<ol class="reveal grid gap-8 sm:grid-cols-3 sm:gap-6" style={`--i: ${i}`}>
@@ -192,7 +192,7 @@ const jsonLd = [
 											style={`animation-delay: ${500 + n * 250}ms`}
 										/>
 									)}
-									<span class="absolute top-0 left-0 grid size-8 place-items-center rounded-full bg-bg font-mono text-xs text-subtle ring-1 ring-line transition-colors duration-300 ease-out-soft group-hover:bg-fg group-hover:text-bg group-hover:ring-fg sm:static">
+									<span class="absolute top-0 left-0 grid size-8 place-items-center rounded-full bg-bg text-sm text-subtle ring-1 ring-line transition-colors duration-300 ease-out-soft group-hover:bg-fg group-hover:text-bg group-hover:ring-fg sm:static">
 										{n + 1}
 									</span>
 									<h3 class="flex flex-wrap items-center gap-2 pt-1 text-[15px] font-medium text-fg sm:mt-5 sm:pt-0">
@@ -214,7 +214,7 @@ const jsonLd = [
 			{
 				p.features.length > 0 && (
 					<section class="mt-20 sm:mt-24">
-						<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+						<h2 class="reveal mb-6 text-sm font-medium text-muted" style={`--i: ${next()}`}>
 							Features
 						</h2>
 						<ul class="reveal space-y-4 text-[15px]" style={`--i: ${i}`}>
@@ -232,13 +232,13 @@ const jsonLd = [
 			{
 				p.requirements.length > 0 && (
 					<section class="mt-20 sm:mt-24">
-						<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+						<h2 class="reveal mb-6 text-sm font-medium text-muted" style={`--i: ${next()}`}>
 							Requirements
 						</h2>
 						<dl class="reveal space-y-3 text-[15px]" style={`--i: ${i}`}>
 							{p.requirements.map((r) => (
 								<div class="flex items-baseline gap-4">
-									<dt class="w-20 shrink-0 font-mono text-xs text-subtle">{r.label}</dt>
+									<dt class="w-20 shrink-0 text-sm text-subtle">{r.label}</dt>
 									<dd class="text-fg">{r.value}</dd>
 								</div>
 							))}
@@ -250,7 +250,7 @@ const jsonLd = [
 			{
 				p.faqs.length > 0 && (
 					<section class="mt-20 sm:mt-24">
-						<h2 class="reveal mb-2 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+						<h2 class="reveal mb-2 text-sm font-medium text-muted" style={`--i: ${next()}`}>
 							FAQ
 						</h2>
 						<div class="reveal divide-y divide-line" style={`--i: ${i}`}>
@@ -276,7 +276,7 @@ const jsonLd = [
 			{
 				p.outro && (
 					<section class="mt-20 sm:mt-24">
-						<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style={`--i: ${next()}`}>
+						<h2 class="reveal mb-6 text-sm font-medium text-muted" style={`--i: ${next()}`}>
 							{p.outro.title}
 						</h2>
 						<p class="reveal max-w-lg leading-relaxed text-muted" style={`--i: ${i}`} set:html={inline(p.outro.text)} />
@@ -286,11 +286,10 @@ const jsonLd = [
 		</main>
 
 		<footer
-			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
 			style={`--i: ${next()}`}
 		>
 			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
-			<span>monawwar.com</span>
 		</footer>
 	</div>
 </Layout>

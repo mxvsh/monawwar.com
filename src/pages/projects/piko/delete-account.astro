@@ -55,7 +55,7 @@ const kept = [
 			</p>
 
 			<section class="mt-14">
-				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">How to request it</h2>
+				<h2 class="mb-4 text-sm font-medium text-muted">How to request it</h2>
 				<ol class="space-y-3 text-[15px] leading-relaxed text-muted">
 					{
 						steps.map((step, i) => (
@@ -75,7 +75,7 @@ const kept = [
 			</section>
 
 			<section class="mt-14">
-				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">What gets deleted</h2>
+				<h2 class="mb-4 text-sm font-medium text-muted">What gets deleted</h2>
 				<ul class="space-y-3 text-[15px] leading-relaxed text-muted">
 					{
 						deleted.map((item) => (
@@ -89,7 +89,7 @@ const kept = [
 			</section>
 
 			<section class="mt-14">
-				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">What may be kept</h2>
+				<h2 class="mb-4 text-sm font-medium text-muted">What may be kept</h2>
 				<ul class="space-y-3 text-[15px] leading-relaxed text-muted">
 					{
 						kept.map((item) => (
@@ -103,7 +103,7 @@ const kept = [
 			</section>
 
 			<section class="mt-14">
-				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">More</h2>
+				<h2 class="mb-4 text-sm font-medium text-muted">More</h2>
 				<p class="max-w-lg leading-relaxed text-muted">
 					See how Piko uses data in the <a href="/projects/piko/privacy" class="link-underline text-fg"
 						>privacy policy</a
@@ -113,11 +113,10 @@ const kept = [
 		</main>
 
 		<footer
-			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
 			style="--i: 8"
 		>
 			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
-			<span>monawwar.com</span>
 		</footer>
 	</div>
 </Layout>

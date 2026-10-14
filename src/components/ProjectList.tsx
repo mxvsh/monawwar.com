@@ -70,7 +70,7 @@ export default function ProjectList({ projects }: { projects: Project[] }) {
 						<div className="min-w-0 flex-1">
 							<h3 className="font-medium text-fg">{project.name}</h3>
 							<p className="mt-1 text-[15px] leading-relaxed text-muted">{project.description}</p>
-							<p className="mt-2 truncate font-mono text-xs text-subtle">
+							<p className="mt-2 truncate text-sm text-subtle">
 								{project.site ? displayUrl(project.site) : `monawwar.com${project.link}`}
 							</p>
 						</div>

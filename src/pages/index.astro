@@ -2,9 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import ThemeToggle from "../components/ThemeToggle";
 import ProjectList from "../components/ProjectList";
-import CopyEmail from "../components/CopyEmail";
+import ContactList from "../components/ContactList.astro";
 import Chip from "../components/Chip.astro";
-import { email, socials } from "../lib/contact";
 import { getProjects } from "../lib/projects";
 
 const projects = (await getProjects()).slice(0, 5);
@@ -54,8 +53,8 @@ const description =
 
 			<section class="mt-20 sm:mt-24">
 				<div class="reveal mb-4 flex items-baseline justify-between" style="--i: 4">
-					<h2 class="font-mono text-xs uppercase tracking-[0.14em] text-subtle">Projects</h2>
-					<a href="/projects" class="link-underline font-mono text-xs text-muted hover:text-fg">View all</a>
+					<h2 class="text-sm font-medium text-muted">Projects</h2>
+					<a href="/projects" class="link-underline text-sm text-muted hover:text-fg">View all</a>
 				</div>
 				<div class="reveal" style="--i: 5">
 					<ProjectList client:idle projects={projects} />
@@ -63,44 +62,18 @@ const description =
 			</section>
 
 			<section class="mt-20 sm:mt-24">
-				<h2 class="reveal mb-6 font-mono text-xs uppercase tracking-[0.14em] text-subtle" style="--i: 6">
+				<h2 class="reveal mb-6 text-sm font-medium text-muted" style="--i: 6">
 					Contact
 				</h2>
-				<p class="reveal mb-6 max-w-lg leading-relaxed text-muted" style="--i: 6">
-					The best way to reach me is on{" "}
-					<a href="https://x.com/monawwarx" target="_blank" rel="noopener noreferrer" class="link-underline text-fg">X</a>.
-				</p>
-				<ul class="reveal space-y-3 text-[15px]" style="--i: 7">
-					<li class="flex items-center gap-4">
-						<span class="w-20 shrink-0 font-mono text-xs text-subtle">Email</span>
-						<a href={`mailto:${email}`} class="link-underline text-fg">{email}</a>
-						<CopyEmail client:visible email={email} />
-					</li>
-					{
-						socials.map((s) => (
-							<li class="flex items-center gap-4">
-								<span class="w-20 shrink-0 font-mono text-xs text-subtle">{s.label}</span>
-								<a
-									href={s.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									class="link-underline text-fg"
-								>
-									@{s.handle}
-								</a>
-							</li>
-						))
-					}
-				</ul>
+				<ContactList class="reveal" style="--i: 7" />
 			</section>
 		</main>
 
 		<footer
-			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
 			style="--i: 8"
 		>
 			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
-			<span>monawwar.com</span>
 		</footer>
 	</div>
 </Layout>

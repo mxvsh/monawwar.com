@@ -91,7 +91,7 @@ const sections = [
 			{
 				sections.map((s) => (
 					<section class="mt-14">
-						<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">{s.heading}</h2>
+						<h2 class="mb-4 text-sm font-medium text-muted">{s.heading}</h2>
 						{s.body && <p class="max-w-lg leading-relaxed text-muted">{s.body}</p>}
 						{s.items && (
 							<ul class={`space-y-3 text-[15px] leading-relaxed text-muted ${s.body ? "mt-4" : ""}`}>
@@ -108,7 +108,7 @@ const sections = [
 			}
 
 			<section class="mt-14">
-				<h2 class="mb-4 font-mono text-xs uppercase tracking-[0.14em] text-subtle">Contact</h2>
+				<h2 class="mb-4 text-sm font-medium text-muted">Contact</h2>
 				<p class="max-w-lg leading-relaxed text-muted">
 					Questions or requests about your data? Email
 					<a href="mailto:hello@monawwar.com?subject=Piko%20privacy" class="link-underline text-fg"
@@ -120,11 +120,10 @@ const sections = [
 		</main>
 
 		<footer
-			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
 			style="--i: 8"
 		>
 			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
-			<span>monawwar.com</span>
 		</footer>
 	</div>
 </Layout>

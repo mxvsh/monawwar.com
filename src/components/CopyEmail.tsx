@@ -52,7 +52,7 @@ export default function CopyEmail({ email }: { email: string }) {
 			</svg>
 			<span
 				aria-hidden="true"
-				className={`pointer-events-none absolute left-full ml-1.5 whitespace-nowrap font-mono text-xs text-muted transition-all duration-300 ease-out-soft ${copied ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0"}`}
+				className={`pointer-events-none absolute left-full ml-1.5 whitespace-nowrap text-sm text-muted transition-all duration-300 ease-out-soft ${copied ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0"}`}
 			>
 				Copied
 			</span>

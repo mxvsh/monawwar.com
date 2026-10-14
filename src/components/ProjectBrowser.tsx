@@ -98,7 +98,7 @@ export default function ProjectBrowser({ projects }: { projects: Project[] }) {
 						</svg>
 					</button>
 				) : (
-					<kbd className="pointer-events-none absolute right-4 top-1/2 hidden -translate-y-1/2 rounded-md px-1.5 py-0.5 font-mono text-xs text-subtle ring-1 ring-line sm:block">
+					<kbd className="pointer-events-none absolute right-4 top-1/2 hidden -translate-y-1/2 rounded-md px-1.5 py-0.5 font-sans text-xs text-subtle ring-1 ring-line sm:block">
 						/
 					</kbd>
 				)}
@@ -127,40 +127,53 @@ export default function ProjectBrowser({ projects }: { projects: Project[] }) {
 				})}
 			</div>
 
-			<p className="mt-8 mb-3 font-mono text-xs text-subtle" aria-live="polite">
+			<p className="mt-10 mb-5 text-sm text-subtle" aria-live="polite">
 				{results.length} {results.length === 1 ? "project" : "projects"}
 			</p>
 
 			{results.length > 0 ? (
-				<ul className="grid gap-3 sm:grid-cols-2">
+				<ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
 					{results.map((p) => (
 						<li key={p.link}>
-							<a
-								href={p.link}
-								className="group flex h-full flex-col rounded-2xl p-4 ring-1 ring-line transition-colors duration-300 ease-out-soft hover:bg-hover focus-visible:bg-hover"
-							>
-								<div className="flex items-center gap-3.5">
-									{p.logo ? (
+							<a href={p.link} className="group flex h-full flex-col focus-visible:outline-offset-8">
+								<div className="relative aspect-[1200/630] overflow-hidden rounded-2xl bg-surface ring-1 ring-line">
+									{p.cover ? (
 										<img
-											src={p.logo}
+											src={p.cover}
 											alt=""
-											width={52}
-											height={52}
+											width={1200}
+											height={630}
 											loading="lazy"
-											className="size-13 shrink-0 rounded-[14px] ring-1 ring-line transition-transform duration-500 ease-out-soft group-hover:-rotate-3 group-hover:scale-105"
+											className="size-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.04]"
 										/>
 									) : (
-										<div className="grid size-13 shrink-0 place-items-center rounded-[14px] bg-surface font-medium text-muted ring-1 ring-line">
+										<div className="grid size-full place-items-center bg-[radial-gradient(80%_100%_at_50%_0%,var(--hover),var(--surface))]">
+											{p.logo && (
+												<img
+													src={p.logo}
+													alt=""
+													width={80}
+													height={80}
+													loading="lazy"
+													className="size-20 rounded-[22px] shadow-[0_8px_24px_-8px_rgb(0_0_0/0.3)] transition-transform duration-700 ease-out-soft group-hover:scale-110"
+												/>
+											)}
+										</div>
+									)}
+								</div>
+
+								<div className="mt-4 flex items-center gap-3">
+									{p.logo ? (
+										<img src={p.logo} alt="" width={40} height={40} loading="lazy" className="size-10 shrink-0 rounded-[11px] ring-1 ring-line" />
+									) : (
+										<div className="grid size-10 shrink-0 place-items-center rounded-[11px] bg-surface font-medium text-muted ring-1 ring-line">
 											{p.name[0]}
 										</div>
 									)}
-									<div className="min-w-0 flex-1">
-										<h2 className="truncate font-medium text-fg">{p.name}</h2>
-										<p className="mt-0.5 font-mono text-xs text-subtle">{p.category}</p>
+									<div className="min-w-0">
+										<h2 className="truncate font-display text-xl font-semibold leading-tight tracking-tight text-fg">{p.name}</h2>
+										<p className="text-[13px] text-subtle">{p.category}</p>
 									</div>
-									<span className="shrink-0 rounded-full bg-surface px-3 py-1 text-xs font-medium text-fg ring-1 ring-line transition-colors duration-300 group-hover:bg-fg group-hover:text-bg group-hover:ring-fg">
-										View
-									</span>
 								</div>
 								<p className="mt-3 line-clamp-2 text-[15px] leading-relaxed text-muted">{p.description}</p>
 							</a>

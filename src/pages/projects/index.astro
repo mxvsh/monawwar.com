@@ -17,7 +17,7 @@ const description = `Apps and tools built by Monawwar Abdullah: ${projects.map((
 	>
 	</div>
 
-	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+	<div class="mx-auto flex min-h-dvh max-w-5xl flex-col px-6 sm:px-8">
 		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
 			<a
 				href="/"
@@ -30,15 +30,15 @@ const description = `Apps and tools built by Monawwar Abdullah: ${projects.map((
 		</header>
 
 		<main class="flex-1 pt-16 sm:pt-24">
-			<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">Projects</h1>
-			<p class="reveal mt-1.5 text-muted" style="--i: 2">Apps and tools I've built, newest first.</p>
-			<div class="reveal mt-8" style="--i: 3">
+			<h1 class="reveal font-display text-5xl font-semibold tracking-tight text-fg sm:text-6xl" style="--i: 1">Projects</h1>
+			<p class="reveal mt-3 max-w-md text-lg text-muted" style="--i: 2">Apps and tools I've built, newest first.</p>
+			<div class="reveal mt-10" style="--i: 3">
 				<ProjectBrowser client:load projects={projects} />
 			</div>
 		</main>
 
 		<footer
-			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 font-mono text-xs text-subtle"
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
 			style="--i: 4"
 		>
 			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>

@@ -1,11 +1,13 @@
 @import "tailwindcss";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
+@import "@fontsource-variable/bricolage-grotesque";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
 	--font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-display: "Bricolage Grotesque Variable", "Geist Variable", ui-sans-serif, system-ui, sans-serif;
 	--font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
 
 	--color-bg: var(--bg);

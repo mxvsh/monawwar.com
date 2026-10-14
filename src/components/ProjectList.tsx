@@ -6,6 +6,8 @@ export interface Project {
 	link: string;
 	site?: string;
 	logo?: string;
+	/** Social/cover image shown on the projects index. */
+	cover?: string;
 	category: string;
 }
 

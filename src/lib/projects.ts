@@ -15,6 +15,7 @@ export async function getProjects(): Promise<Project[]> {
 			link: `/projects/${id}`,
 			site: (data.links.find((l) => l.icon === "web") ?? data.links.find((l) => l.icon === "github"))?.href,
 			logo: data.logo,
+			cover: data.og?.src,
 			category: categoryLabel(data.category),
 		}));
 }

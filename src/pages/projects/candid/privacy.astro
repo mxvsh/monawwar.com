@@ -1,0 +1,135 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ThemeToggle from "../../../components/ThemeToggle";
+
+const title = "Candid — Privacy Policy";
+const description = "How Candid collects, uses and protects your data, and how to delete it.";
+const updated = "October 30, 2026";
+
+const sections = [
+	{
+		heading: "What we collect",
+		items: [
+			"Hosts: when you sign in with Google, we store your name, email address and profile picture. We also store the events you create (name, type, dates, code and settings) and which Drives are linked to them.",
+			"Connected Google Drives: when you connect a Drive, we store the Google account's email address, name and storage usage, plus an encrypted token that lets Candid upload on your behalf. Candid only asks for access to the files and folders it creates itself (the drive.file scope), never to the rest of your Drive.",
+			"Guests: no account is needed. If you choose to enter a name, we store it with your uploads. We also store a random identifier for your device and the events you joined.",
+			"Uploads: the photos and videos you send go from your device straight to the host's Google Drive. They don't pass through our servers and we don't keep a copy. We keep a record of each upload: file name, type, size, when it was captured, who sent it and from which device (platform, OS version, model and app or browser). The files themselves keep whatever metadata they already had, which can include the camera model, time and location.",
+			"Device permissions: the camera, microphone and photo library are used only to scan event codes, capture media and upload what you pick. If you allow notifications, we store a push notification token for your device.",
+			"Technical data: IP address and request logs, used to keep the service secure and to limit abuse.",
+		],
+	},
+	{
+		heading: "How we use it",
+		items: [
+			"To run Candid: sign hosts in, create events, send uploads to the right Drive and show hosts and guests what has been uploaded.",
+			"To tell a host who shot what, using the name and device details attached to each upload.",
+			"To send notifications you have asked for.",
+			"To keep Candid secure, enforce limits and fix problems.",
+		],
+	},
+	{
+		heading: "Who can see what",
+		items: [
+			"The host of an event sees its uploads, the names guests entered and the device details of each upload.",
+			"If the host turns the gallery on, guests of that event can see the photos and videos uploaded to it. The host can hide individual items.",
+			"Anyone with an event's code or link can join it, so share it only with the people you want there. The host can rotate the code at any time.",
+		],
+	},
+	{
+		heading: "Who we share it with",
+		body: "We don't sell your personal data. These providers process data on our behalf:",
+		items: [
+			"Google: sign-in for hosts and Google Drive, where your files are stored.",
+			"Cloudflare: hosting, the API and our database.",
+			"Apple and Google: push notification delivery, and sign-in if you choose Sign in with Apple.",
+		],
+	},
+	{
+		heading: "Google user data",
+		body: "Candid's use and transfer of information received from Google APIs to any other app adheres to the Google API Services User Data Policy, including the Limited Use requirements. We use Google data only to sign you in and to create folders and upload files in the Drive you connect. We don't use it for advertising, and we don't let people read it except to operate the service, for security, or where the law requires it.",
+	},
+	{
+		heading: "Retention and deletion",
+		body: "We keep your data while your account or event exists. A host can delete an event, which removes its records from Candid. A host can disconnect a Drive at any time, which deletes the stored token and revokes Candid's access at Google. Files already uploaded stay in the host's Google Drive, because they belong to the host; delete them there. To delete your whole account, or to ask a host's event data to be removed, email us and we will do it within 30 days. Backups are cleared within 30 days after that.",
+	},
+	{
+		heading: "Your rights",
+		body: "Depending on where you live, you may have the right to access, correct, export or delete your data, to object to or restrict how it is used, and to withdraw consent. Email us and we will respond within 30 days.",
+	},
+	{
+		heading: "Children",
+		body: "Candid is not directed at children under 13, and we do not knowingly collect their personal data. If you believe a child has given us data, email us and we will delete it.",
+	},
+	{
+		heading: "Security",
+		body: "Data is sent over encrypted connections, and Drive access tokens are encrypted at rest. Because uploads go straight to Google Drive, your files are protected by your Google account's own security. No system is perfectly secure, but we work to protect yours.",
+	},
+	{
+		heading: "Changes",
+		body: "If we change this policy we will update the date above and, for significant changes, tell you in the app or on the dashboard.",
+	},
+];
+---
+
+<Layout title={title} description={description} path="/projects/candid/privacy">
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/"
+				aria-label="Home"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
+
+		<main class="flex-1 pt-20 sm:pt-28">
+			<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">
+				Candid privacy policy
+			</h1>
+			<p class="reveal mt-1.5 text-muted" style="--i: 2">Last updated {updated}</p>
+			<p class="reveal mt-8 max-w-lg text-[17px] leading-8 text-muted" style="--i: 3">
+				Candid collects photos and videos from event guests straight into the host's own Google Drive,
+				and is made by Monawwar Abdullah. This page explains what data Candid collects and what
+				happens to it.
+			</p>
+
+			{
+				sections.map((s) => (
+					<section class="mt-14">
+						<h2 class="mb-4 text-sm font-medium text-muted">{s.heading}</h2>
+						{s.body && <p class="max-w-lg leading-relaxed text-muted">{s.body}</p>}
+						{s.items && (
+							<ul class={`space-y-3 text-[15px] leading-relaxed text-muted ${s.body ? "mt-4" : ""}`}>
+								{s.items.map((item) => (
+									<li class="flex gap-3">
+										<span aria-hidden="true" class="text-subtle">–</span>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						)}
+					</section>
+				))
+			}
+
+			<section class="mt-14">
+				<h2 class="mb-4 text-sm font-medium text-muted">Contact</h2>
+				<p class="max-w-lg leading-relaxed text-muted">
+					Questions or requests about your data? Email
+					<a href="mailto:hello@monawwar.com?subject=Candid%20privacy" class="link-underline text-fg"
+						>hello@monawwar.com</a
+					>. See also the <a href="/projects/candid/terms" class="link-underline text-fg">terms of use</a>.
+				</p>
+			</section>
+		</main>
+
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
+			style="--i: 8"
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+		</footer>
+	</div>
+</Layout>

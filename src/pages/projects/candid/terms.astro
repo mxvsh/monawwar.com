@@ -1,0 +1,122 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ThemeToggle from "../../../components/ThemeToggle";
+
+const title = "Candid — Terms of Use";
+const description = "The rules for using Candid as a host or a guest.";
+const updated = "October 30, 2026";
+
+const sections = [
+	{
+		heading: "Using Candid",
+		items: [
+			"Hosts sign in with Google, connect a Google Drive and create events. Guests join an event with its code, QR code or link and need no account.",
+			"By using Candid you agree to these terms. If you don't, please don't use it.",
+			"You must be at least 13 years old, or the minimum age in your country, to use Candid.",
+		],
+	},
+	{
+		heading: "Your files",
+		items: [
+			"Photos and videos go straight to the host's Google Drive and stay there. Candid doesn't take ownership of them and doesn't keep a copy.",
+			"You keep all rights to what you upload. You give Candid only the permission it needs to run the service: to send your uploads to the host's Drive and, if the host turns the gallery on, to show them to guests of that event.",
+			"Guests are responsible for what they upload. Hosts are responsible for their events: who they invite, whether guests have agreed to share photos and videos of themselves, and what they do with the files.",
+		],
+	},
+	{
+		heading: "Acceptable use",
+		body: "Don't use Candid to:",
+		items: [
+			"upload anything illegal, or anything that sexualises minors, harasses or threatens people, or that you don't have the right to share;",
+			"upload malware, or try to break, overload or get around the service or its limits;",
+			"collect media from people without their knowledge, or share an event's code with the aim of flooding it.",
+		],
+	},
+	{
+		heading: "Google Drive",
+		body: "Candid depends on Google Drive. Storage space, file limits and the safety of your files are governed by Google and your Google account. If a Drive is full, disconnected or its folder is deleted, uploads may pause or fail. Hosts are responsible for keeping their Drive connected and for having enough space.",
+	},
+	{
+		heading: "Events and codes",
+		body: "Anyone who has an event's code or link can join it. A host can rotate the code, hide items from the gallery or delete the event at any time. Deleting an event removes it from Candid but not the files already in the host's Drive.",
+	},
+	{
+		heading: "Availability and changes",
+		body: "Candid is free while it is new, and some features and limits may change. We may add paid plans later and will tell you before anything you already use becomes paid. We may change, suspend or stop parts of the service, and we'll try to give notice when we can.",
+	},
+	{
+		heading: "Ending your use",
+		body: "You can stop using Candid at any time, disconnect your Drives and ask us to delete your account. We may suspend or remove accounts and events that break these terms or put the service or other people at risk.",
+	},
+	{
+		heading: "No guarantees",
+		body: "Candid is provided as is, without promises that it will always be available or free of errors. Please keep your own copy of anything you can't afford to lose. To the extent the law allows, Candid and its maker aren't liable for lost files, missed moments or indirect damages from using the service. Nothing here limits rights you have by law.",
+	},
+	{
+		heading: "Changes to these terms",
+		body: "If we change these terms we will update the date above and, for significant changes, tell you in the app or on the dashboard. Continuing to use Candid after that means you accept them.",
+	},
+];
+---
+
+<Layout title={title} description={description} path="/projects/candid/terms">
+	<div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6 sm:px-8">
+		<header class="reveal flex items-center justify-between pt-8 sm:pt-12">
+			<a
+				href="/"
+				aria-label="Home"
+				class="block size-9 overflow-hidden rounded-full ring-1 ring-line transition-transform duration-300 ease-out-soft hover:scale-105"
+			>
+				<img src="/avatar.jpg" alt="Monawwar Abdullah" width="36" height="36" class="size-full object-cover" />
+			</a>
+			<ThemeToggle client:load />
+		</header>
+
+		<main class="flex-1 pt-20 sm:pt-28">
+			<h1 class="reveal text-2xl font-medium tracking-tight text-fg sm:text-3xl" style="--i: 1">
+				Candid terms of use
+			</h1>
+			<p class="reveal mt-1.5 text-muted" style="--i: 2">Last updated {updated}</p>
+			<p class="reveal mt-8 max-w-lg text-[17px] leading-8 text-muted" style="--i: 3">
+				These terms cover Candid, made by Monawwar Abdullah, on the web and in the mobile app, for
+				hosts and guests alike.
+			</p>
+
+			{
+				sections.map((s) => (
+					<section class="mt-14">
+						<h2 class="mb-4 text-sm font-medium text-muted">{s.heading}</h2>
+						{s.body && <p class="max-w-lg leading-relaxed text-muted">{s.body}</p>}
+						{s.items && (
+							<ul class={`space-y-3 text-[15px] leading-relaxed text-muted ${s.body ? "mt-4" : ""}`}>
+								{s.items.map((item) => (
+									<li class="flex gap-3">
+										<span aria-hidden="true" class="text-subtle">–</span>
+										<span>{item}</span>
+									</li>
+								))}
+							</ul>
+						)}
+					</section>
+				))
+			}
+
+			<section class="mt-14">
+				<h2 class="mb-4 text-sm font-medium text-muted">Contact</h2>
+				<p class="max-w-lg leading-relaxed text-muted">
+					Questions about these terms? Email
+					<a href="mailto:hello@monawwar.com?subject=Candid%20terms" class="link-underline text-fg"
+						>hello@monawwar.com</a
+					>. See also the <a href="/projects/candid/privacy" class="link-underline text-fg">privacy policy</a>.
+				</p>
+			</section>
+		</main>
+
+		<footer
+			class="reveal mt-24 flex items-center justify-between border-t border-line py-8 text-sm text-subtle"
+			style="--i: 8"
+		>
+			<span>&copy; {new Date().getFullYear()} Monawwar Abdullah</span>
+		</footer>
+	</div>
+</Layout>
